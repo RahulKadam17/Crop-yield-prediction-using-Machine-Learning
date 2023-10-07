@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--<title>Registration Form in HTML CSS</title>-->
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/style1.css">
+    <script>
+        var myVar;
+
+
+
+        function func() {
+            document.getElementById("loader").style.display = "block";
+        }
+        function func1() {
+            document.getElementById("loader").style.display = "none";
+        }
+    </script>
+</head>
+
+<body id="body">
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    {% block body %}
+
+
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="header">
+        <h1>Crop Yield Prediction</h1>
+      </div>
+    <div id="main">
+    <section class="container">
+
+        <!-- <form action="/" method="post" class="form" enctype="multipart/form-data">
+            <div class="input-box">
+                <label>State name</label>
+                <select class="attr" id="state" name="state" required>
+                    <option selected>Select State</option>
+                    {% for s in lis1 %}
+                    <option value="{{s}}">{{s}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label>District Name</label>
+                <select class="attr" id="dist" name="dist" required>
+                    <option selected>Select District</option>
+                    {% for d in lis %}
+                    <option value="{{d}}">{{d}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label>Season</label>
+                <select class="attr" id="season" name="season" required>
+                    <option selected>Select Season</option>
+                    {% for se in lis2 %}
+                    <option value="{{se}}">{{se}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label>Crop</label>
+                <select class="attr" id="crop" name="crop" required>
+                    <option selected>Select Crop</option>
+                    {% for c in lis3 %}
+                    <option value="{{c}}">{{c}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box attr">
+                <label for="area">Area</label>
+                <input placeholder="Area in hectares" type="text" name="area" id="area">
+            </div>
+
+            <button onclick="func()">Submit</button>
+        </form> -->
+        <form action="/" method="post" class="form" enctype="multipart/form-data">
+            <div class="input-box">
+                <label>State name</label>
+                <select class="attr" id="state" name="state" required>
+                    <option selected disabled>Select State</option>
+                    {% for s in lis1 %}
+                    <option value="{{s}}">{{s}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="input-box">
+                <label>District Name</label>
+                <select class="attr" id="dist" name="dist" required>
+                    <option selected disabled>Select District</option>
+                    {% for d in lis %}
+                    <option value="{{d}}">{{d}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="input-box">
+                <label>Season</label>
+                <select class="attr" id="season" name="season" required>
+                    <option selected disabled>Select Season</option>
+                    {% for se in lis2 %}
+                    <option value="{{se}}">{{se}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="input-box">
+                <label>Crop</label>
+                <select class="attr" id="crop" name="crop" required>
+                    <option selected disabled>Select Crop</option>
+                    {% for c in lis3 %}
+                    <option value="{{c}}">{{c}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="input-box attr">
+                <label for="area">Area</label>
+                <input placeholder="Area in hectares" type="text" name="area" id="area">
+            </div>
+        
+            <button onclick="func()" type="submit">Submit</button>
+        </form>
+        
+        <script>
+             
+            // Function to persist form values in local storage
+            function persistFormValues() {
+                const state = document.getElementById('state').value;
+                const district = document.getElementById('dist').value;
+                const season = document.getElementById('season').value;
+                const crop = document.getElementById('crop').value;
+                const area = document.getElementById('area').value;
+        
+                // Store the form values in local storage
+                localStorage.setItem('state', state);
+                localStorage.setItem('district', district);
+                localStorage.setItem('season', season);
+                localStorage.setItem('crop', crop);
+                localStorage.setItem('area', area);
+            }
+        
+            // Function to populate form fields from local storage (if available)
+            function populateFormFields() {
+                const state = localStorage.getItem('state');
+                const district = localStorage.getItem('district');
+                const season = localStorage.getItem('season');
+                const crop = localStorage.getItem('crop');
+                const area = localStorage.getItem('area');
+        
+                if (state) document.getElementById('state').value = state;
+                if (district) document.getElementById('dist').value = district;
+                if (season) document.getElementById('season').value = season;
+                if (crop) document.getElementById('crop').value = crop;
+                if (area) document.getElementById('area').value = area;
+            }
+        
+            // Call the populateFormFields function when the document is ready
+            document.addEventListener('DOMContentLoaded', function () {
+                populateFormFields();
+            });
+        
+            // Call the persistFormValues function when the form is submitted
+            document.querySelector('.form').addEventListener('submit', function () {
+                persistFormValues();
+            });
+        </script>
+        
+    </section>
+
+    <div class="lds-spinner" style="display: none;" id="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <section class="result">
+        {% if bio %}
+
+        <div class="input-box1">
+            <p>Results:</p>
+            <br>
+            <p>Yield==><span style="color: rgb(7, 9, 7); font-weight: bold;">{{bio}} tons/hectare</span>
+            </p>
+            <p>Best Season to grow given Crop==><span style="color: rgb(7, 9, 7); font-weight: bold;">{{best_seas}} </span></p>
+            <p>Best Crops as per the Locality==> 
+                <span style="color: rgb(7, 9, 7); font-weight: bold;">
+                    {{crop_pr.index[0]}},
+                    {{crop_pr.index[1]}},
+                    {{crop_pr.index[2]}}
+                </span>
+                
+            </p>
+        </div>
+
+        <div class="input-box2">
+            <img src="./static/graph1.png" alt="Graph1" id="graph">
+        </div>
+    </section>
+</div>
+    {% endif %}
+    {% endblock body %}
+</body>`
+
+</html>
